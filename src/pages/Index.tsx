@@ -16,12 +16,15 @@ const Index = () => {
   const [rememberMe, setRememberMe] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
   const [index, setIndex] = useState(0);
-  const [showOTPInput, setShowOTPInput] = useState(false);  // New state for OTP
+  const [showOTPInput, setShowOTPInput] = useState(false);
   const [OTP, setOTP] = useState("");
+  const [showEmailInputForOTP, setShowEmailInputForOTP] = useState(false); // Track if email input is shown for OTP
+    const [emailForOTP, setEmailForOTP] = useState("");
+
   const carouselCards = [
     {
       id: 1,
-      title: "https://res.cloudinary.com/dqobnxxos/image/upload/v1751701958/Yellow_Illustrative_Web_Design_Promotion_Banner_tzilfm.png",
+      title: "src/Yellow Illustrative Web Design Promotion Banner.png",
       subtitle: "Professional Email Solutions",
       description: "Secure, reliable email hosting with enterprise-grade features and 99.9% uptime guarantee.",
       mockData: {
@@ -33,7 +36,7 @@ const Index = () => {
     },
     {
       id: 2,
-      title: "https://res.cloudinary.com/dqobnxxos/image/upload/v1751701949/Blue_and_Yellow_Modern_Hiring_Team_Banner_pidazi.png",
+      title: "src/Blue and Yellow Modern Hiring Team Banner.png",
       subtitle: "Seamless Team Communication",
       description: "Boost productivity with integrated calendar, contacts, and tasks.",
       mockData: {
@@ -45,7 +48,7 @@ const Index = () => {
     },
     {
       id: 3,
-      title: "https://res.cloudinary.com/dqobnxxos/image/upload/v1751701958/Yellow_Illustrative_Web_Design_Promotion_Banner_tzilfm.png",
+      title: "src/Yellow Illustrative Web Design Promotion Banner.png",
       subtitle: "Advanced Protection for Your Data",
       description: "Protect your emails with advanced security and spam protection features.",
       mockData: {
@@ -109,15 +112,19 @@ const Index = () => {
   };
 
   const handleSignInWithEmail = () => {
-    // Add your logic here to send OTP to the email address
-    console.log("Sending OTP to:", formData.email);
-    setShowOTPInput(true); // Show the OTP input field
+    setShowEmailInputForOTP(true); // Show email input for OTP
   };
+  const handleOTPSend = () => {
+      // Add your logic here to send OTP to the email address
+    console.log("Sending OTP to:", emailForOTP);
+    setShowEmailInputForOTP(false);
+    setShowOTPInput(true); // Show the OTP input field
+  }
 
     const handleOTPVerify = () => {
       // Add your logic here to Verify OTP from the email address
 
-      console.log("verifying OTP to:", formData.email);
+      console.log("verifying OTP to:", emailForOTP);
         setShowOTPInput(false); // show access dashboard
     };
 
@@ -375,18 +382,18 @@ const Index = () => {
         {/* Content */}
         <div className="relative  flex flex-col justify-center items-center text-center px-12 py-20 m-auto max-w-2xl ">
           {/* Branding */}
-         
-            <div className="bg-white absolute top-[-25px] left-[-20px] p-3 rounded-lg z-[999]">
-              <img
-                src="https://sixthstartech.in/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdwyn5jgh3%2Fimage%2Fupload%2Fv1751096407%2FOur_Innovation_serves_you_better_200_x_100_px_300_x_100_px_g4pgpz.png&w=256&q=75"
-                alt="Company Logo"
-                width={140}
-                height={32}
-                className="object-contain"
-              />
-            </div>
 
-          
+          <div className="bg-white absolute top-[-25px] left-[-20px] p-3 rounded-lg z-[999]">
+            <img
+              src="src/logo.webp"
+              alt="Company Logo"
+              width={140}
+              height={32}
+              className="object-contain"
+            />
+          </div>
+
+
 
           {/* Headline + Subtext */}
           <h1 className="text-4xl font-extrabold leading-tight">
@@ -465,7 +472,7 @@ const Index = () => {
             <CardContent className="px-6 pb-6 space-y-4"> {/* Reduced padding */}
 
               {/* Email or Continue */}
-              {!isSignUp && !showOTPInput ? (
+              {!isSignUp && !showOTPInput && !showEmailInputForOTP ? (
                 <div className="flex flex-col items-center space-y-6 w-full">
                   <button
                     className="w-full max-w-sm px-6 py-3 bg-black text-white rounded-xl shadow-md hover:bg-gray-900 transition duration-300 ease-in-out font-medium tracking-wide"
@@ -483,6 +490,32 @@ const Index = () => {
                 </div>
               ) : null
               }
+               {/* Email Input for OTP (Conditionally Rendered) */}
+               {showEmailInputForOTP && (
+        <div className="space-y-4">
+          <div className="space-y-2">
+            <Label htmlFor="emailForOTP" className="text-gray-700 font-medium text-sm">Email Address</Label>
+            <div className="relative">
+              <Mail className="absolute left-3 top-3.5 h-5 w-5 text-gray-400" />
+              <Input
+                id="emailForOTP"
+                type="email"
+                placeholder="your@domain.com"
+                value={emailForOTP}
+                onChange={(e) => setEmailForOTP(e.target.value)}
+                className="h-10 pl-10 border-gray-200 focus:border-[#352281] focus:ring-[#352281] rounded-lg"
+              />
+            </div>
+          </div>
+
+          <Button
+            onClick={handleOTPSend}
+            className="w-full bg-[#352281] hover:bg-[#2a1c6b] text-white font-semibold py-2.5 h-10 text-sm rounded-lg shadow-lg"
+          >
+            Send OTP
+          </Button>
+        </div>
+      )}
 
               {/* OTP Input (Conditionally Rendered) */}
               {showOTPInput && (
@@ -508,7 +541,7 @@ const Index = () => {
               )}
 
               {/* Toggle Buttons */}
-              {!showOTPInput ?
+              {!showOTPInput && !showEmailInputForOTP ?
               (<div className="flex bg-gray-100 rounded-lg p-0.5"> {/* Reduced padding */}
                 <Button
                   type="button"
@@ -572,7 +605,7 @@ const Index = () => {
                       )}
                     </div>
                   </div>
-                ) : (!showOTPInput ?(
+                ) : (!showOTPInput && !showEmailInputForOTP ?(
                   <>
                     <div className="space-y-2">
                       <Label htmlFor="email" className="text-gray-700 font-medium text-sm">Email Address</Label>
@@ -619,8 +652,7 @@ const Index = () => {
                           id="remember"
                           checked={rememberMe}
                           onCheckedChange={(checked) => setRememberMe(checked === true)}
-                          className="border-gray-300"
-                        />
+                          className="border-gray-300" />
                         <Label htmlFor="remember" className="text-sm text-gray-600">
                           Remember me
                         </Label>
@@ -642,7 +674,7 @@ const Index = () => {
               }
               </form>
 
-              {!isSignUp && !showOTPInput && (
+              {!isSignUp && !showOTPInput && !showEmailInputForOTP &&(
                 <div className="text-xs text-gray-500 text-center leading-relaxed">
                   By signing in, you agree to our{" "}
                   <a href="#" className="text-[#352281] hover:underline">Terms of Service</a> and{" "}
