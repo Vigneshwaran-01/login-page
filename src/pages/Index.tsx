@@ -21,7 +21,7 @@ const Index = () => {
   const carouselCards = [
     {
       id: 1,
-      title: "src/Yellow Illustrative Web Design Promotion Banner.png",
+      title: "https://res.cloudinary.com/dqobnxxos/image/upload/v1751701958/Yellow_Illustrative_Web_Design_Promotion_Banner_tzilfm.png",
       subtitle: "Professional Email Solutions",
       description: "Secure, reliable email hosting with enterprise-grade features and 99.9% uptime guarantee.",
       mockData: {
@@ -33,7 +33,7 @@ const Index = () => {
     },
     {
       id: 2,
-      title: "src/Blue and Yellow Modern Hiring Team Banner.png",
+      title: "https://res.cloudinary.com/dqobnxxos/image/upload/v1751701949/Blue_and_Yellow_Modern_Hiring_Team_Banner_pidazi.png",
       subtitle: "Seamless Team Communication",
       description: "Boost productivity with integrated calendar, contacts, and tasks.",
       mockData: {
@@ -45,7 +45,7 @@ const Index = () => {
     },
     {
       id: 3,
-      title: "src/Yellow Illustrative Web Design Promotion Banner.png",
+      title: "https://res.cloudinary.com/dqobnxxos/image/upload/v1751701958/Yellow_Illustrative_Web_Design_Promotion_Banner_tzilfm.png",
       subtitle: "Advanced Protection for Your Data",
       description: "Protect your emails with advanced security and spam protection features.",
       mockData: {
@@ -378,7 +378,7 @@ const Index = () => {
          
             <div className="bg-white absolute top-[-25px] left-[-20px] p-3 rounded-lg z-[999]">
               <img
-                src="src/logo.webp"
+                src="https://sixthstartech.in/_next/image?url=https%3A%2F%2Fres.cloudinary.com%2Fdwyn5jgh3%2Fimage%2Fupload%2Fv1751096407%2FOur_Innovation_serves_you_better_200_x_100_px_300_x_100_px_g4pgpz.png&w=256&q=75"
                 alt="Company Logo"
                 width={140}
                 height={32}
